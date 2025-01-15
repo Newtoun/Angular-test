@@ -1,0 +1,28 @@
+<div class="login-container">
+    <p-card header="Login" class="login-card">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="p-field">
+          <label for="username">Usuário</label>
+          <input id="username" type="text" pInputText formControlName="username" />
+          <small *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="p-error">
+            Usuário é obrigatório.
+          </small>
+        </div>
+  
+        <div class="p-field">
+          <label for="password">Senha</label>
+          <input id="password" type="password" pInputText formControlName="password" />
+          <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="p-error">
+            Senha é obrigatória.
+          </small>
+        </div>
+  
+        <div *ngIf="errorMessage" class="p-error">{{ errorMessage }}</div>
+  
+        <div class="button-container">
+          <button pButton type="submit" label="Entrar" [disabled]="loading || loginForm.invalid"></button>
+        </div>
+      </form>
+    </p-card>
+  </div>
+  
