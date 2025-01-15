@@ -1,0 +1,42 @@
+<div class="upload-container">
+    <p-card header="Upload de Arquivo">
+      <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+        <div class="p-field">
+          <label for="date">Selecione uma data</label>
+          <p-calendar
+            id="date"
+            formControlName="date"
+            [showIcon]="true"
+            dateFormat="dd/mm/yy"
+            placeholder="Selecione uma data"
+          ></p-calendar>
+          <small *ngIf="uploadForm.get('date')?.invalid && uploadForm.get('date')?.touched" class="p-error">
+            A data é obrigatória.
+          </small>
+        </div>
+  
+        <div class="p-field">
+          <label for="file">Selecione um arquivo</label>
+          <input
+            id="file"
+            type="file"
+            (change)="onFileSelect($event)"
+            class="p-inputtext"
+          />
+          <small *ngIf="fileError" class="p-error">{{ fileError }}</small>
+        </div>
+  
+        <div class="button-container">
+          <button
+            pButton
+            type="submit"
+            label="Enviar"
+            [disabled]="!uploadForm.valid || !selectedFile || loading"
+          ></button>
+        </div>
+      </form>
+    </p-card>
+  
+    <p-toast></p-toast>
+  </div>
+  
